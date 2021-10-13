@@ -1,0 +1,48 @@
+{{- $params := .Scratch.Get "params" -}}
+{{- $cdn := .Scratch.Get "cdn" | default dict -}}
+{{- $fingerprint := .Scratch.Get "fingerprint" -}}
+{{- $config := (.Scratch.Get "this").config -}}
+
+{{- /* Smooth Scroll */ -}}
+{{- $source := $cdn.smoothScrollJS | default "lib/smooth-scroll/smooth-scroll.min.js" -}}
+{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+{{- /* lazysizes */ -}}
+{{- $source := $cdn.lazysizesJS | default "lib/lazysizes/lazysizes.min.js" -}}
+{{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+{{- $code := $params.code | default dict -}}
+{{- $config = cond (ne $code.maxShownLines nil) $code.maxShownLines 10 | dict "maxShownLines" | dict "code" | merge $config -}}
+
+{{- /* TypeIt */ -}}
+{{- with (.Scratch.Get "this").typeitMap -}}
+    {{- $typeit := $.Site.Params.typeit -}}
+    {{- $source := $cdn.typeitJS | default "lib/typeit/typeit.min.js" -}}
+    {{- dict "Source" $source "Fingerprint" $fingerprint | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+    {{- $config = dict "speed" $typeit.speed "cursorSpeed" $typeit.cursorSpeed "cursorChar" $typeit.cursorChar "duration" $typeit.duration "data" . | dict "typeit" | merge $config -}}
+{{- end -}}
+
+{{- with (.Scratch.Get "this").styleArr -}}
+    {{- $content := delimit . "" -}}
+    {{- $path := substr (md5 $content) 0 6 | printf "css/%v" -}}
+    {{- $options := printf "%v.min.css" $path | dict "targetPath" -}}
+    {{- dict "Content" $content "Path" (printf "%v.scss" $path) "ToCSS" $options | dict "Scratch" $.Scratch "Data" | partial "scratch/style.html" -}}
+{{- end -}}
+
+{{- /* Config script */ -}}
+{{- $config | jsonify | printf "window.config=%s;" | dict "Content" | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+{{- /* Theme script */ -}}
+{{- dict "Source" "js/theme.js" "Fingerprint" $fingerprint | dict "Scratch" .Scratch "Data" | partial "scratch/script.html" -}}
+
+{{- with (.Scratch.Get "this").scriptArr -}}
+    {{- delimit . "\n" | dict "Content" | dict "Scratch" $.Scratch "Data" | partial "scratch/script.html" -}}
+{{- end -}}
+
+{{- range (.Scratch.Get "this").style -}}
+    {{- partial "plugin/style.html" . -}}
+{{- end -}}
+
+{{- range (.Scratch.Get "this").script -}}
+    {{- partial "plugin/script.html" . -}}
+{{- end -}}

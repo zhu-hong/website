@@ -1,0 +1,55 @@
+baseURL = "https://ws-zh.vercel.app"
+defaultContentLanguage = "zh-cn"
+languageCode = "zh-CN"
+hasCJKLanguage = true
+title = "zh-ws"
+theme = "LoveIt"
+
+[[menu.main]]
+identifier = "posts"
+name = "文章"
+url = "/posts/"
+weight = 1
+[[menu.main]]
+identifier = "notes"
+name = "笔记"
+url = "/notes/"
+weight = 2
+[[menu.main]]
+identifier = "categories"
+name = "分类"
+url = "/categories/"
+weight = 3
+[[menu.main]]
+identifier = "tags"
+name = "标签"
+url = "/tags/"
+weight = 4
+
+[params]
+version = "0.2.X"
+
+[params.app]
+svgFavicon = "/logo.svg"
+
+[params.home.profile]
+avatarURL = "/avatar.svg"
+subtitle = "为了不折腾而折腾🔧"
+typeit = true
+social = true
+
+[params.social]
+GitHub = "zhu-hong"
+Bilibili = "100452267"
+Email = "zhxhyy@qq.com"
+
+[author]
+name = "朱鸿"
+link = "/posts/"
+
+[params.footer]
+copyright = true
+since = 2021
+
+[markup.highlight]
+noClasses = false

@@ -1,0 +1,89 @@
+{{- /* Desktop header */ -}}
+<header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+                {{- with .Site.Params.header.title -}}
+                    {{- if .typeit -}}
+                        {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+                        <span id="{{ $id }}" class="typeit"></span>
+                        {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                    {{- else -}}
+                        {{- .name -}}
+                    {{- end -}}
+                {{- else -}}
+                    {{- .Site.Title -}}
+                {{- end -}}
+            </a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+                {{- range .Site.Menus.main -}}
+                    {{- $url := .URL | relLangURL -}}
+                    {{- with .Page -}}
+                        {{- $url = .RelPermalink -}}
+                    {{- end -}}
+                    <a class="menu-item{{ if $.IsMenuCurrent `main` . | or ($.HasMenuCurrent `main` .) | or (eq $.RelPermalink $url) }} active{{ end }}" href="{{ $url }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                        {{- .Pre | safeHTML }} {{ .Name }} {{ .Post | safeHTML -}}
+                    </a>
+                {{- end -}}
+                {{- if .Site.Menus.main -}}
+                    <span class="menu-item delimiter"></span>
+                {{- end -}}
+                <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+{{- /* Mobile header */ -}}
+<header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
+                    {{- with .Site.Params.header.title -}}
+                        {{- with .logo -}}
+                            {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
+                        {{- end -}}
+                        {{- with .pre -}}
+                            <span class="header-title-pre">{{ . | safeHTML }}</span>
+                        {{- end -}}
+                        {{- if .typeit -}}
+                            {{- $id := dict "Content" .name "Scratch" $.Scratch | partial "function/id.html" -}}
+                            <span id="{{ $id }}" class="typeit"></span>
+                            {{- dict $id (slice $id) | dict "typeitMap" | merge ($.Scratch.Get "this") | $.Scratch.Set "this" -}}
+                        {{- else -}}
+                            {{- .name -}}
+                        {{- end -}}
+                        {{- with .post -}}
+                            <span class="header-title-post">{{ . | safeHTML }}</span>
+                        {{- end -}}
+                    {{- else -}}
+                        {{- .Site.Title -}}
+                    {{- end -}}
+                </a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile">
+            {{- $currentPage := . -}}
+            {{- range .Site.Menus.main -}}
+                {{- $url := .URL | relLangURL -}}
+                {{- with .Page -}}
+                    {{- $url = .RelPermalink -}}
+                {{- end -}}
+                <a class="menu-item" href="{{ $url }}" title="{{ .Title }}"{{ if (urls.Parse $url).Host }} rel="noopener noreffer" target="_blank"{{ end }}>
+                    {{- .Pre | safeHTML }}{{ .Name }}{{ .Post | safeHTML -}}
+                </a>
+            {{- end -}}
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="{{ T "switchTheme" }}">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,123 @@
+# === baseof ==
+[backToTop]
+other = "回到顶部"
+# === baseof ==
+
+# === Post ===
+[posts]
+other = "文章"
+
+[notes]
+other = "笔记"
+# === Post ===
+
+# === Taxonomy ===
+[allSome]
+other = "所有{{ .Some }}"
+
+[tag]
+other = "标签"
+
+[tags]
+other = "标签"
+
+[category]
+other = "分类"
+
+[categories]
+other = "分类"
+# === Taxonomy ===
+
+# === Pagination ===
+[more]
+other = "更多"
+# === Pagination ===
+
+# === partials/header.html ===
+[switchTheme]
+other = "切换主题"
+# === partials/header.html ===
+
+# === posts/single.html ===
+[contents]
+other = "目录"
+
+[publishedOnDate]
+other = "发布于 {{ .Date }}"
+
+[includedInCategories]
+other = "收录于 {{ .Categories }}"
+
+[wordCount]
+other = "约 {{ .Count }} 字"
+
+[readingTime]
+other = "预计阅读 {{ .Count }} 分钟"
+
+[views]
+other = "次阅读"
+
+[author]
+other = "作者"
+
+[updatedOnDate]
+other = "更新于 {{ .Date }}"
+
+[readMarkdown]
+other = "阅读原始文档"
+
+[back]
+other = "返回"
+
+[home]
+other = "主页"
+
+[readMore]
+other = "阅读全文"
+# === posts/single.html ===
+
+# === 404.html ===
+[pageNotFound]
+other = "页面没找到"
+
+[pageNotFoundText]
+other = "抱歉，您要查找的页面不存在。"
+# === 404.html ===
+
+# === shortcodes/admonition.html ===
+[note]
+other = "注意"
+
+[abstract]
+other = "摘要"
+
+[info]
+other = "信息"
+
+[tip]
+other = "技巧"
+
+[success]
+other = "成功"
+
+[question]
+other = "问题"
+
+[warning]
+other = "警告"
+
+[failure]
+other = "失败"
+
+[danger]
+other = "危险"
+
+[bug]
+other = "Bug"
+
+[example]
+other = "示例"
+
+[quote]
+other = "引用"
+# === shortcodes/admonition.html ===

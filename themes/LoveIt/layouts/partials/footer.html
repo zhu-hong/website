@@ -1,0 +1,19 @@
+{{- if ne .Site.Params.footer.enable false -}}
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-line">
+                {{- /* Copyright year */ -}}
+                {{- if ne .Site.Params.footer.copyright false -}}
+                    <i class="far fa-copyright fa-fw"></i>
+                    {{- with .Site.Params.footer.since -}}
+                        <span itemprop="copyrightYear">
+                            {{- if lt . now.Year }}{{ . }} - {{ end }}{{ now.Year -}}
+                        </span>
+                    {{- else -}}
+                        <span itemprop="copyrightYear">{{ now.Year }}</span>
+                    {{- end -}}
+                {{- end -}}
+            </div>
+        </div>
+    </footer>
+{{- end -}}

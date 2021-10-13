@@ -1,0 +1,58 @@
+.home {
+  .home-profile {
+    @include transform(translateY( 16vh));
+    padding: 0 0 .5rem;
+    text-align: center;
+
+    .home-avatar {
+      padding: .5rem;
+
+      img {
+        display: inline-block;
+        width: 8rem;
+        height: auto;
+        margin: 0 auto;
+        @include border-radius(100%);
+        @include box-shadow(0 0 0 .3618em rgba(0, 0, 0, .05));
+        @include transition(all 0.4s ease);
+
+        &:hover {
+          position: relative;
+          @include transform(translateY(-.75rem));
+        }
+      }
+    }
+
+    .home-subtitle {
+      font-size: 1rem;
+      font-weight: normal;
+      margin: 0;
+      padding: .5rem;
+    }
+
+    .links {
+      padding: .5rem;
+      font-size: 1.5rem;
+
+      a * {
+        vertical-align: text-bottom;
+      }
+
+      img {
+        height: 1.5rem;
+        padding: 0 .25rem;
+      }
+    }
+  }
+}
+
+.home[posts] {
+  .home-profile {
+    @include transform(translateY(0));
+    padding-top: 2rem;
+  }
+
+  .home-avatar img {
+    width: 6rem;
+  }
+}

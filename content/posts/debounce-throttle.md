@@ -151,4 +151,4 @@ function throttle(fn, delay) {
 
 ## 实践
 
-[debounce-throttle (dev-zh.vercel.app)](https://dev-zh.vercel.app/example/debounce-throttle/)
+[debounce-throttle (vainlla-probe.vercel.app)](https://vainlla-probe.vercel.app/example/debounce-throttle/)

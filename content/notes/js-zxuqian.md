@@ -1,8 +1,8 @@
 ---
-title: "JS学习笔记(B站峰华前端工程师)"
+title: "js-zxuqian"
 date: 2020-10-23T11:34:01+08:00
 draft: true
-categories: [JavaSript]
+categories: [JavaScript]
 ---
 
 ## 函数

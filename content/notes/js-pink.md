@@ -1,8 +1,8 @@
 ---
-title: "JS学习笔记(黑马程序员)"
+title: "js-pink"
 date: 2020-02-13T12:58:47+08:00
 draft: true
-categories: [JavaSript]
+categories: [JavaScript]
 ---
 
 ## ECMA

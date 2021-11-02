@@ -2,7 +2,7 @@
 title: "函数防抖与节流"
 date: 2021-10-12T23:05:52+08:00
 draft: true
-categories: [JavaSript]
+categories: [JavaScript]
 ---
 
 ## 简介

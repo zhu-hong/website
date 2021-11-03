@@ -2,7 +2,7 @@ baseURL = "https://ws-zh.vercel.app"
 defaultContentLanguage = "zh-cn"
 languageCode = "zh-CN"
 hasCJKLanguage = true
-title = "zh-ws"
+title = "朱鸿的个人网站"
 theme = "LoveIt"
 
 [[menu.main]]

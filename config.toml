@@ -33,7 +33,7 @@ version = "0.2.X"
 svgFavicon = "/logo.svg"
 
 [params.home.profile]
-avatarURL = "/avatar.svg"
+avatarURL = "/avatar.webp"
 subtitle = "为了不折腾而折腾🔧"
 typeit = true
 social = true

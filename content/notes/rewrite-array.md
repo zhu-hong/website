@@ -2,6 +2,7 @@
 title: "Array方法重写"
 date: 2021-11-03T14:42:46+08:00
 draft: true
+tags: [rewrite]
 categories: [JavaScript]
 ---
 

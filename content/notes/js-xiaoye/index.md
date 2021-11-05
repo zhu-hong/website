@@ -48,3 +48,25 @@ console.log(!!' ' + !!'' + !!false || 'pass')
 `[[scope]]`函数执行完即被销毁,使用外部正常情况下无法访问函数内部数据
 
 当内部函数被返回到外部并保存时,一定会产生闭包,闭包会产生原来的作用域链不释放
+
+## 原型
+
+`prototype` 函数的一个属性
+
+`__proto__` Object的一个属性 类似于链条,连着上一层
+
+object的`__proto__`保存着构造函数的`prototype`
+
+```javascript
+Function.__proto__ === Function.prototype // true 底层规定
+Object.__proto__ === Function.prototype // true
+```
+
+## new
+
+过程
+
+1. 生成一个空对象 this -> {}
+2. `this.__proto__` -> 构造函数.prototype
+3. 返回this
+

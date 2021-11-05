@@ -70,3 +70,13 @@ Object.__proto__ === Function.prototype // true
 2. `this.__proto__` -> 构造函数.prototype
 3. 返回this
 
+## 生成器
+
+```javascript
+// 生成器的存在为了返回一个迭代器
+```
+
+![generator](./generator.webp)
+
+![iterator](./iterator.webp)
+

@@ -80,3 +80,63 @@ Object.__proto__ === Function.prototype // true
 
 ![iterator](./iterator.webp)
 
+## 你不知道的Object
+
+### assign
+
+合并`自身`可`枚举`属性
+
+同一引用
+
+```javascript
+const merged = Object.assign(target, ...sources);
+
+merged === target // true
+```
+
+### create
+
+参数
+
+1. 原型指向
+2. OwnProperties
+
+```javascript
+Object.create(null) // 无原型
+
+Object.create({}, {
+  prop: {
+    value,
+    configurable: false, // 增加删除
+    writable: false, // 修改
+    enumerable: false, // 枚举
+    get: function() {},
+    set: function(valve) {},
+  }, //descriptor
+})
+```
+
+### entries/fromEntries
+
++ 原型不参与
++ 自身可枚举
+
+```javascript
+{a: 1, b: 2} <=> [['a', 1], ['b', 2]]
+```
+
+### freeze
+
++ 对象(数组)冻结 自身属性
++ 同一引用
++ 浅冻结
+
+```javascript
+{
+  value,
+  configurable: false, // 增加删除
+  writable: false, // 修改
+  enumerable: true, // 枚举
+}
+```
+

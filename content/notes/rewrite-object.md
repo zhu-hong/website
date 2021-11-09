@@ -1,7 +1,8 @@
 ---
 title: "Rewrite Object"
 date: 2021-11-09T19:35:56+08:00
-draft: truetags: [rewrite]
+draft: true
+tags: [rewrite]
 categories: [JavaScript]
 ---
 

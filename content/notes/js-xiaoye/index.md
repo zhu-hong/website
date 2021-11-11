@@ -209,6 +209,18 @@ const data = [
 
 console.log(formatDataTree(data))
 
+// 扁平化处理
+// 第二种写法,有人说只做了第一层,为什么最后还是形成了树,是因为filter拿的是后面数组元素的引用,后面再给子元素添加它的子元素,已经添加到第一层的子元素也会跟着改
+function formatDataTree(data: any[]) {
+  let _data: any[] = JSON.parse(JSON.stringify(data));
+
+  return _data.filter((p) => {
+    const _arr = _data.filter((c) => c.pid === p.id)
+    _arr.length && (p.children = _arr)
+    return p.pid === 0
+  })
+}
+
 // 递归写法
 // function formatDataTree(data: any[]): any[] {
 //   let [parents, childrens] = [data.filter(p => p.pid === 0), data.filter(p => p.pid !== 0)]
@@ -234,17 +246,5 @@ console.log(formatDataTree(data))
 
 //   return parents
 // }
-
-// 扁平化处理
-// 第二种写法,有人说只做了第一层,为什么最后还是形成了树,是因为filter拿的是后面数组元素的引用,后面再给子元素添加它的子元素,已经添加到第一层的子元素也会跟着改
-function formatDataTree(data: any[]) {
-  let _data: any[] = JSON.parse(JSON.stringify(data));
-
-  return _data.filter((p) => {
-    const _arr = _data.filter((c) => c.pid === p.id)
-    _arr.length && (p.children = _arr)
-    return p.pid === 0
-  })
-}
 ```
 

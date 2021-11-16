@@ -295,3 +295,6 @@ function formatDataTree(data: any[]): any[] {
 }
 ```
 
+## Array.from
+
+取决于`length`若无默认为零,多裁少补`undefined`

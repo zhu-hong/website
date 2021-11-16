@@ -69,7 +69,7 @@ function banomedals(data){
 
 ## 实践
 
-[JSONP (vainlla-probe.vercel.app)](https://vainlla-probe.vercel.app/example/JSONP/)
+https://vanilla-probe.vercel.app/example/JSONP/
 
 ## 插曲
 

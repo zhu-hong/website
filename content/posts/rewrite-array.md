@@ -1,11 +1,14 @@
 ---
-title: "Array方法重写"
+title: "重写Array方法"
 date: 2021-11-03T14:42:46+08:00
 draft: true
 tags: [rewrite]
 categories: [JavaScript]
+code:
+  maxShownLines: 30
 ---
 
+## 深拷贝
 ```javascript
 function deepClone(origin, target) {
   var tar = target || {};
@@ -26,8 +29,12 @@ function deepClone(origin, target) {
 
   return tar;
 }
+```
 
-Array.prototype.ForEachRw = function (cb) {
+## forEach
+
+```javascript
+Array.prototype.forEachRw = function (cb) {
   var _arr = this;
   var _len = _arr.length;
   var _this = arguments[1] || window;
@@ -36,8 +43,12 @@ Array.prototype.ForEachRw = function (cb) {
     cb.apply(_this, [_arr[i], i, _arr]);
   }
 }
+```
 
-Array.prototype.MapRw = function (cb) {
+## map
+
+```javascript
+Array.prototype.mapRw = function (cb) {
   var _arr = this;
   var _len = _arr.length;
   var _this = arguments[1] || window;
@@ -51,7 +62,11 @@ Array.prototype.MapRw = function (cb) {
 
   return _newArr;
 }
+```
 
+## filter
+
+```javascript
 Array.prototype.filterRw = function (cb) {
   var _arr = this;
   var _len = _arr.length;
@@ -65,7 +80,10 @@ Array.prototype.filterRw = function (cb) {
 
   return _newArr;
 }
+```
 
+## every
+```javascript
 Array.prototype.everyRw = function (cb) {
   var _arr = this;
   var _len = _arr.length;
@@ -81,7 +99,10 @@ Array.prototype.everyRw = function (cb) {
 
   return _res;
 }
+```
 
+## some
+```javascript
 Array.prototype.someRw = function (cb) {
   var _arr = this;
   var _len = _arr.length;
@@ -97,7 +118,10 @@ Array.prototype.someRw = function (cb) {
 
   return _res;
 }
+```
 
+## reduce
+```javascript
 Array.prototype.reduceRw = function (cb, initialValue) {
   var _arr = this;
   var _len = _arr.length;

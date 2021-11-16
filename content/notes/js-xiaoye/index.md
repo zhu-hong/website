@@ -120,6 +120,7 @@ Object.create({}, {
 
 + 原型不参与
 + 自身可枚举
++ 只作用在第一层
 
 ```javascript
 {a: 1, b: 2} <=> [['a', 1], ['b', 2]]
@@ -138,9 +139,55 @@ Object.create({}, {
   writable: false, // 修改
   enumerable: true, // 枚举
 }
+  
+obj.__proto__ = {} // X 严格模式报错
 ```
 
-## 数据树形结构化
+### seal
+
+1. 对象(数组)封闭 自身属性
+2. 同一引用
+3. 浅封闭
+
+```javascript
+{
+  value,
+  configurable: false, // 增加删除
+  writable: true, // 修改
+  enumerable: true, // 枚举
+  get, // X
+  set, // X
+}
+  
+obj.__proto__ = {} // X
+```
+
+### preventExtensions
+
+1. 禁止扩展
+
+```javascript
+{
+  value,
+  configurable: false, // 增加不可删除可
+  writable: true, // 修改
+  enumerable: true, // 枚举
+  get, // X
+  set, // X
+}
+  
+obj.__proto__ = {} // X
+```
+
+### 总结(非空对象情况下)
+
+| \            | freeze | seal | preventExtensions |
+| ------------ | ------ | ---- | ----------------- |
+| isFrozen     | y      | n    | n                 |
+| isSealed     | y      | y    | n                 |
+| isExtensible | y      | y    | y                 |
+
+##数据树形结构化
 
 > 一个扁平数据列表 => 描述树形结构的字段 PID => 树形结构列表
 >
@@ -149,7 +196,7 @@ Object.create({}, {
 1. 顶级与子级数据分开
 2. 递归或其他操作
 
-```javascript
+```typescript
 const data = [
   {
     id: 2,
@@ -212,7 +259,7 @@ console.log(formatDataTree(data))
 // 扁平化处理
 // 第二种写法,有人说只做了第一层,为什么最后还是形成了树,是因为filter拿的是后面数组元素的引用,后面再给子元素添加它的子元素,已经添加到第一层的子元素也会跟着改
 function formatDataTree(data: any[]) {
-  let _data: any[] = JSON.parse(JSON.stringify(data));
+  let _data: any[] = JSON.parse(JSON.stringify(data))
 
   return _data.filter((p) => {
     const _arr = _data.filter((c) => c.pid === p.id)
@@ -222,29 +269,29 @@ function formatDataTree(data: any[]) {
 }
 
 // 递归写法
-// function formatDataTree(data: any[]): any[] {
-//   let [parents, childrens] = [data.filter(p => p.pid === 0), data.filter(p => p.pid !== 0)]
+function formatDataTree(data: any[]): any[] {
+  let [parents, childrens] = [data.filter(p => p.pid === 0), data.filter(p => p.pid !== 0)]
 
-//   dataToTree(parents, childrens)
+  dataToTree(parents, childrens)
 
-//   function dataToTree(parents: any[], childrens: any[]) {
-//     parents.forEach((p, i) => {
-//       childrens.forEach((c) => {
-//         let _childrens: any[] = JSON.parse(JSON.stringify(childrens))
-//         _childrens.splice(i, 1)
-//         dataToTree([c], _childrens)
+  function dataToTree(parents: any[], childrens: any[]) {
+    parents.forEach((p, i) => {
+      childrens.forEach((c) => {
+        let _childrens: any[] = JSON.parse(JSON.stringify(childrens))
+        _childrens.splice(i, 1)
+        dataToTree([c], _childrens)
 
-//         if (c.pid === p.id) {
-//           if (!p.children) {
-//             p.children = []
-//           }
-//           p.children.push(c)
-//         }
-//       })
-//     })
-//   }
+        if (c.pid === p.id) {
+          if (!p.children) {
+            p.children = []
+          }
+          p.children.push(c)
+        }
+      })
+    })
+  }
 
-//   return parents
-// }
+  return parents
+}
 ```
 

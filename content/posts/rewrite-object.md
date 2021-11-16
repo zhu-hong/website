@@ -4,7 +4,11 @@ date: 2021-11-09T19:35:56+08:00
 draft: true
 tags: [rewrite]
 categories: [JavaScript]
+code:
+  maxShownLines: 30
 ---
+
+## assign
 
 ```javascript
 Object.assignRw = function (target, ...sources) {
@@ -18,7 +22,11 @@ Object.assignRw = function (target, ...sources) {
 
   return target
 }
+```
 
+## entries
+
+```javascript
 Object.entriesRw = function (origin) {
   var _pool = []
 
@@ -43,7 +51,11 @@ Object.fromEntriesRw = function (origin) {
 
   return _obj
 }
+```
 
+## deepFreeze
+
+```javascript
 Object.deepFreeze = function (origin) {
   var _keys = Object.getOwnPropertyNames(origin)
 

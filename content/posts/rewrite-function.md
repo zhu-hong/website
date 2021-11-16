@@ -1,11 +1,14 @@
 ---
-title: "call,apply,bind,new重写"
+title: "重写call-apply-bind-new"
 date: 2021-11-05T11:41:59+08:00
 draft: true
 tags: [rewrite]
 categories: [JavaScript]
+code:
+  maxShownLines: 30
 ---
 
+## call
 ```javascript
 Function.prototype.callRw = function (ctx) {
 
@@ -36,7 +39,11 @@ Function.prototype.callRw = function (ctx) {
 
   return res;
 }
+```
 
+## apply
+
+```javascript
 Function.prototype.applyRw = function (ctx, args) {
 
   ctx = ctx ? Object(ctx) : window;
@@ -63,7 +70,11 @@ Function.prototype.applyRw = function (ctx, args) {
 
   return res;
 }
+```
 
+## typeOf
+
+```javascript
 function typeOf(value) {
   if (value === null) {
     return 'null';
@@ -77,7 +88,11 @@ function typeOf(value) {
     '[object Boolean]': 'Boolean',
   }[Object.prototype.toString.callRw(value)] : typeof value;
 }
+```
 
+## bind
+
+```javascript
 Function.prototype.bindRw = function (ctx) {
   var originFunc = this;
   var args = Array.prototype.slice.callRw(arguments, 1);
@@ -94,7 +109,11 @@ Function.prototype.bindRw = function (ctx) {
 
   return newFunc;
 }
+```
 
+## new
+
+```javascript
 function newRw() {
   var constructor = Array.prototype.shift.call(arguments);
   var _this = {};

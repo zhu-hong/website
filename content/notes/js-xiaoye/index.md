@@ -459,3 +459,97 @@ function shuffleArray(arr) {
   return newArr
 }
 ```
+
+## 参数作用域
+
+1. 
+
+```javascript
+var x = 1
+
+function test(x, y = function () {
+  x = 3 
+  // 问题就在于这个x到底是哪个,是全局的还是函数内部的
+  // 然而都不是,这个test函数形参中的那个x,这就是参数作用域
+  console.log(x) //
+}) {
+  console.log(x) // 实参 undefined
+  
+  var x = 2
+  
+  y()
+  console.log(x) // 2
+}
+
+test()
+console.log(x) // 1
+```
+
+2. 
+
+```javascript
+var x = 1
+
+function test(a, y = function () {
+  x = 3
+  console.log(x) // 3 此x为全局的x,因为参数作用域内无x
+}) {
+  console.log(x) // undefined 此x为函数内部的var x = 2的预编译变量提升
+  
+  var x = 2
+  
+  y()
+  console.log(x) // 2
+}
+
+test()
+console.log(x) // 3
+```
+
+3. 
+
+```javascript
+var x = 1
+
+function test(x = 4, y = function () {
+  x = 3
+  console.log(x) // 3 参数内的x
+}) {
+  console.log(x) // 4
+  
+  var x = 2
+  
+  y()
+  console.log(x) // 2
+}
+
+test()
+console.log(x) // 1
+```
+
+4. 
+
+```javascript
+var x = 1
+
+function yy() {
+  x = 3
+  console.log(x) // 3 全局的x
+}
+
+function test(x, y = yy) {
+  console.log(x) // undefined
+  
+  var x = 2
+  
+  y() // 
+  console.log(x) // 2
+}
+
+test()
+console.log(x) // 3
+```
+
+### 参考
+
+> https://www.bilibili.com/video/BV1Wq4y167UZ

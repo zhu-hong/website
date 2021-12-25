@@ -1,5 +1,5 @@
 ---
-title: "ts"
+title: "四个TS神奇类型"
 date: 2021-11-25T07:47:44+08:00
 draft: true
 categories: [TypeScript]
@@ -7,9 +7,7 @@ code:
   maxShownLines: 100
 ---
 
-## any/unknown/void/never
-
-### any
+## any
 
 此类型变量和写js无异,表示它可以是任何类型,该变量的操作不受任何限制,在ts中如果一个声明只声明了,没有赋值或者规定类型,那么这个变量默认为`any`类型,任何类型的值可以赋给它,它也可以赋给任何类型的值,自由度太高,建议从不使用
 
@@ -28,7 +26,7 @@ let me: number
 me = go
 ```
 
-### unknown
+## unknown
 
 该类型声明之后再赋值不会自动进行类型判断,它始终只会是`unknown`类型,任何类型的值可以赋给它但是没有意义,它只能赋给同为`unknown`类型的值
 
@@ -62,7 +60,7 @@ let me: number
 me = go // Type 'unknown' is not assignable to type 'number'
 ```
 
-### void
+## void
 
 表示一个空值,没有意义,可以在`strictNullChecks`为`false`的情况下能且只能赋给`undefined`/`null`,一般表示没有任何返回值的函数的返回值类型
 
@@ -80,7 +78,7 @@ function go(): void {
 }
 ```
 
-### never
+## never
 
 此类型表示一个不该存在的值的类型,非常的抽象,看代码
 
@@ -114,7 +112,7 @@ function infiniteLoop(): never {
 }
 ```
 
-## 联合类型 |
+# 联合类型 |
 
 需要一个共有且值不同的类型来做判断,比如下方的`kind`
 
@@ -146,7 +144,7 @@ function area(s: Shape) {
 
 > https://jkchao.github.io/typescript-book-chinese/typings/discrominatedUnion.html
 
-## 函数
+# 函数
 
 ```typescript
 const co: (cao: number) => number = (cao) => Math.pow(cao, cao)

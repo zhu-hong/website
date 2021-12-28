@@ -1,5 +1,5 @@
 ---
-title: "JS经验"
+title: "经验整理"
 date: 2021-12-27T19:44:43+08:00
 draft: true
 categories: [JavaScript]

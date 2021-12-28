@@ -40,3 +40,34 @@ jsphdGet('posts', {
   console.log(data)
 })
 ```
+
+```javascript
+const curryingHTTP = (baseURL) => {
+  const config = {
+    baseURL,
+  }
+  return {
+    get(url, args) {
+      return new Promise(async (resolve) => {
+        const { data } = await axios(Object.assign(config, {
+          method: 'GET',
+          url,
+          params: args,
+        }))
+        resolve(data)
+      })
+    },
+    post(url, args) {
+      return new Promise(async (resolve) => {
+        const { data } = await axios(Object.assign(config, {
+          method: 'POST',
+          url,
+          data: args,
+        }))
+        resolve(data)
+      })
+    },
+  }
+}
+
+```

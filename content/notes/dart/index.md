@@ -80,6 +80,8 @@ List<num> l = new List.empty(growable: true);
 // where 同JS中filter过滤 返回的值需要toList
 
 // map forEach 同JS
+
+// firstWhere 类似JS中find 未找到对应元素程序崩溃(使用可选命名参数orELse(函数返回值)兜底)
 ```
 ### Set
 ```dart
@@ -88,7 +90,7 @@ Set s = { 1, 1, 1 };
 
 // 有一套得出两个Set交集/并集/差集的API
 ```
-### Map(可理解为JS中的对象)
+### Map
 ```dart
 Map m = {
   'name': 'zhuh',
@@ -96,14 +98,138 @@ Map m = {
 };
 
 // 访问属性的值(不支持编程语言中普遍的.) 无该属性返回为null
-me['name']
+me['name'];
+
+// 修改属性的值 无该属性则添加该属性
+me['age'] = 21;
 
 me.keys; // 返回对象所有的key 需要toList
 
 // Map在dart中是可迭代对象类似List有forEach/map等API
 ```
+### 函数
+```dart
+// 函数返回类型写在函数名前
+// 参数类型写在参数命前
+int add(int a, int b) {
+ return a + b;
+}
+
+// 立即执行函数
+((int n){
+  print(n); // 1
+})(1);
+
+// 可选参数使用[]包裹
+void add (int a, [int? b]) {
+  // b可传可不传,就有可能未null与int类型不符 加一个?
+}
+void add (int a, [int b = 3, int? c]) {
+  // b可传可不传,就有可能未null与int类型不符 给一个默认值
+  // 多个可选参数时写在一个[]里','分隔
+}
+
+// 命名参数使用{}包裹
+void add (int a, {int? b}) {
+  // b可传可不传,就有可能未null与int类型不符 加一个?
+}
+void add (int a, {int b = 3, String? c}) {
+  // b可传可不传,就有可能未null与int类型不符 给一个默认值
+  // 多个命名参数时写在一个{}里','分隔
+}
+add(1, b: 12);
+
+// 异步函数 async 写在函数体前
+void fetch() async {
+ final res = await Dio().get('https://yesno.wtf/api');
+ print(res);
+}
+```
+### Future
+![[future_type.webp]]
+```dart
+import 'package:dio/dio.dart';
+
+void main() async {
+  Future fetch = Future(() async {
+    Dio d = Dio();
+    var res = await d.get('https://yesno.wtf/api');
+    return res;
+  });
+
+  fetch
+   .then((res) => print(res))
+   .catchError((err) => print(err));  
+
+  print(await fetch);
+}
 
 
+void main() async {
+ Future fetch = Future(() async {
+   try {
+     Dio d = Dio();
+     var res = await d.get('https://yesno.wtf/ap');
+     return Future.value(res);
+   } catch (e) {
+     return Future.value(fa);
+   }
+ });
+ 
+ print(await fetch);
+}
+```
+### class
+```dart
+class Me {
+  static int _count = 0;
 
+  late String name;
 
+  Me(String name) {
+    _count++;
+    this.name = name;
+  }
+  // 构造函数简写
+  // Me(this.name);
+  // 赋予初始值
 
+  // 命名构造函数
+  Me.name({ String name = 'zhu_hong'}) {
+    _count++;
+    this.name = name;
+    _introduce();
+  }
+
+  // 加下划线变为私有,范围为本文件
+  void _introduce() {
+    print('my name is $name');
+  }
+
+  // 常量构造函数使用const声明 相关字段使用final关键字声明 实例使用const声明
+  // final String name;
+  // const Me(this.name);
+
+  // 工厂构造函数 无this 单例模式相关?
+  // factory Me() {}
+
+  // getter
+  String get wife {
+    if(this.name == 'zhu_hong') {
+      return 'wang_yan_yan';
+    } else {
+      return 'null';
+    }
+  }
+
+  // setter
+  set wife(String name) {
+    if(name == 'wang_yan_yan' && this.name == 'zhu_hong') {
+      // ...
+    }
+    else {
+      throw Error();
+    }
+  }
+}
+```
